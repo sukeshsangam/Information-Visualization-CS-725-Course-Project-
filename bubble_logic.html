@@ -1,0 +1,338 @@
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+.axis--x path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node {
+  cursor: pointer;
+}
+
+.node:hover {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node--leaf {
+  fill: white;
+}
+
+.label {
+  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+}
+
+.label,
+.node--root,
+.node--leaf {
+  pointer-events: none;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: white;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+.legend-text
+{
+padding-right:10px;
+}
+
+</style>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+<link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
+<script src="project.js"></script>
+<script>
+
+</script>
+
+
+<script>
+
+function myFunction()
+{
+
+$("#Selection2").hide();
+
+$("#navigation").show();
+$("#hide_div").hide();
+}
+
+
+function check(x)
+{
+if(x==1)
+{
+$("#hide_div").hide();
+$("#Selection2").hide();
+$("#navigation").show();
+}
+else{
+$("#navigation").hide();
+$("#hide_div").show();
+$("#Selection2").show();
+getval("All");
+
+}
+
+}
+
+</script>
+</head>
+
+<body onload="myFunction()">
+
+<div >
+<div class="topnav" id="myTopnav">
+  <div class="navbar-header">
+				<a class="navbar-brand" href="#">Movie Trends </a>
+			</div>
+
+  <a href="#Explore" onclick='check(1)'>Explore</a>
+  <a href="#Compare" onclick='check(2)'>Compare</a>
+  <a class="navbar-brand">
+  <div id="Selection2" class="row tab-pane">
+		<label for="sel1" >Select Country:</label>
+				  <select class="selcountry" id="sel1" onchange="getval(this)">
+					<option value="Select"> Select</option>
+					<option value="All"> All</option>
+					<option value="USA"> USA</option>
+					<option value="UK"> UK</option>
+					<option value="France"> France</option>
+					<option value="India"> India</option>
+					<option value="Japan"> Japan</option>
+					<option value="Pakistan"> Pakistan</option>
+					<option value="Germany"> Germany</option>
+					<option value="Turkey"> Turkey</option>
+					<option value="Australia"> Australia</option>
+					<option value="Hong Kong"> Hong Kong</option>
+					<option value="China"> China</option>
+					<option value="Brazil"> Brazil</option>
+					<option value="Argentina"> Argentina</option>
+					<option value="South Korea"> South Korea</option>
+					<option value="Canada"> Canada</option>
+					<option value="Czech Republic"> Czech Republic</option>
+					<option value="Bahamas"> Bahamas</option>
+					<option value="Italy"> Italy</option>
+					<option value="South Africa"> South Africa</option>
+					<option value="New Zealand"> New Zealand</option>
+					<option value="Indonesia"> Indonesia</option>
+					<option value="Taiwan"> Taiwan</option>
+					<option value="Denmark"> Denmark</option>
+					<option value="Ireland"> Ireland</option>
+					<option value="Spain"> Spain</option>
+					<option value="United Arab Emirates"> United Arab Emirates</option>
+					<option value="Panama"> Panama</option>
+					<option value="Switzerland"> Switzerland</option>
+					<option value="Morocco"> Morocco</option>
+					<option value="Thailand"> Thailand</option>
+					<option value="Iceland"> Iceland</option>
+					<option value="Hungary"> Hungary</option>
+					<option value="Mexico"> Mexico</option>
+					<option value="West Germany"> West Germany</option>
+					<option value="Russia"> Russia</option>
+					<option value="Luxembourg"> Luxembourg</option>
+					<option value="Lithuania"> Lithuania</option>
+					<option value="Poland"> Poland</option>
+					<option value="Slovenia"> Slovenia</option>
+					<option value="Philippines"> Philippines</option>
+					<option value="Austria"> Austria</option>
+					<option value="Finland"> Finland</option>
+					<option value="Bulgaria"> Bulgaria</option>
+					<option value="Malta"> Malta</option>
+					<option value="Paraguay"> Paraguay</option>
+					<option value="Uruguay"> Uruguay</option>
+					<option value="Netherlands"> Netherlands</option>
+					<option value="Belgium"> Belgium</option>
+					<option value="Peru"> Peru</option>
+					<option value="Tunisia"> Tunisia</option>
+					<option value="Lebanon"> Lebanon</option>
+					<option value="Libya"> Libya</option>
+					<option value="Kuwait"> Kuwait</option>
+					<option value="Chile"> Chile</option>
+					<option value="Kazakhstan"> Kazakhstan</option>
+					<option value="Romania"> Romania</option>
+					<option value="Norway"> Norway</option>
+					<option value="Sweden"> Sweden</option>
+					<option value="Greece"> Greece</option>
+					<option value="Cambodia"> Cambodia</option>
+					<option value="Latvia"> Latvia</option>
+					<option value="Soviet Union"> Soviet Union</option>
+					<option value="Iran"> Iran</option>
+					<option value="Algeria"> Algeria</option>
+					<option value="Federal Republic of Yugoslavia"> Federal Republic of Yugoslavia</option>
+					<option value="Bosnia and Herzegovina"> Bosnia and Herzegovina</option>
+					<option value="Singapore"> Singapore</option>
+					<option value="Colombia"> Colombia</option>
+					<option value="Ecuador"> Ecuador</option>
+					<option value="Cyprus"> Cyprus</option>
+					<option value="Liechtenstein"> Liechtenstein</option>
+					<option value="Israel"> Israel</option>
+					<option value="Portugal"> Portugal</option>
+					<option value="Isle Of Man"> Isle Of Man</option>
+					<option value="Serbia"> Serbia</option>
+					<option value="Slovakia"> Slovakia</option>
+					<option value="Angola"> Angola</option>
+				  </select>
+</div>
+</a>
+  
+</div>
+<div id="hide_div">
+ <div class="row well">
+
+<div class="w3-card col-lg-5">
+	<header class="w3-container w3-light-grey">
+	  <h3 id="BubbleTitle"></h3>
+	</header>
+
+	<div class="w3-container">
+		<div id="bubblechart" class="w3-panel w3-card ">
+	</div>
+</div>
+</div>
+
+<h3 id="LinechartTitle" style="font-weight:bold;background:grey;color:white;margin:auto;text-align:center;"></h3>
+<div id="trend" class="col-lg-7 ">
+
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div id="circlechart1"  style="visibility: hidden" class="w3-panel w3-card col-lg-6">
+<form action="">
+<center>
+<table >
+<tr>
+<th>
+  <input type="radio" name="circle_parking" value="star" id="myRadio1" checked="checked"> Star <br>
+  </th>
+  <th>
+  <input type="radio" name="circle_parking"  id="myRadio1" value="director"> Director <br>
+  </th>
+  </tr>
+  </table>
+  </center>
+</form>
+
+<center>  <h1 id="circleTitle"> </h1></center>
+
+<div id="circlechart" class="w3-panel w3-card col-sm-6" >
+</div>
+</div>
+<div id="barchart1" class="w3-panel w3-card col-sm-6" style="visibility: hidden; float:left;" >
+<center>  <h1 id="BarTitle"> </h1></center>
+<center>
+<form action="">
+<center>
+<table >
+<tr>
+<th>
+  <input type="radio" name="gender" value="year_bar" id="myRadio" checked="checked" > year v/s percentage<br>
+  </th>
+  <th>
+  <input type="radio" name="gender"  id="myRadio" value="duration_bar" > duration v/s percentage<br>
+  </th>
+  </tr>
+  </table>
+  </center>
+ 
+</form>
+</center>
+<div id="barchart" style="float:left">
+
+
+<center>
+<form action="">
+<center>
+<table >
+<tr>
+<th>
+  <input type="radio" name="gender" value="year_bar" id="myRadio" checked="checked" > year v/s percentage<br>
+  </th>
+  <th>
+  <input type="radio" name="gender"  id="myRadio" value="duration_bar" > duration v/s percentage<br>
+  </th>
+  </tr>
+  </table>
+  </center>
+ 
+</form>
+</center>
+</div>
+</div>
+
+
+
+
+</div>
+</div >
+
+</div >
+
+<div id="navigation" >
+<center><h1>   </h1></center>
+
+<center><iframe src="index1.html"  height="900" width="1200"></iframe></center>
+</div>
+
+
+</body>
+</html>
